@@ -1,0 +1,36 @@
+{
+  "name": "twenteacademy-taserver",
+  "version": "0.1.0",
+  "author": "twenteacademy",
+  "summary": "Puppet module TA server",
+  "license": "Proprietary",
+  "source": "https://github.com/twenteacademy/puppet-taserver",
+  "project_page": "https://github.com/twenteacademy/puppet-taserver",
+  "issues_url": "https://github.com/twenteacademy/puppet-taserver/issues",
+  "operatingsystem_support": [
+      {
+          "operatingsystem": "Debian",
+          "operatingsystemrelease": [
+              "7"
+          ]
+      },
+      {
+          "operatingsystem": "Ubuntu",
+          "operatingsystemrelease": [
+              "14.04"
+          ]
+      }
+  ],
+  "requirements": [
+    {
+      "name": "pe",
+      "version_requirement": "3.x"
+    },
+    {
+      "name": "puppet",
+      "version_requirement": ">= 3.0.0"
+    }
+  ],
+  "dependencies": [
+  ]
+}
