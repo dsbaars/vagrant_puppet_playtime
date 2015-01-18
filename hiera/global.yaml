@@ -5,16 +5,3 @@ apt::sources:
     repos: 'main'
     key: '1054B7A24BD6EC30'
     key_server: 'pgp.mit.edu'
-
-  'foreman':
-    location: 'http://deb.theforeman.org/'
-    repos: '1.7'
-    key_source: 'http://deb.theforeman.org/pubkey.gpg'
-    key: '1AA043B8'
-
-  'foreman_plugins':
-    location: 'http://deb.theforeman.org/'
-    repos: '1.7'
-    release: 'plugins'
-    key_source: 'http://deb.theforeman.org/pubkey.gpg'
-    key: '1AA043B8'

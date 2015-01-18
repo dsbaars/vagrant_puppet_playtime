@@ -23,9 +23,9 @@ Vagrant.configure("2") do |config|
   # puppet + parallels boxes are rare.
 	config.vm.box = "parallels/ubuntu-14.04"
 
-  config.vm.hostname = 'puppetmaster'
+  config.vm.hostname = 'puppetmaster.localdomain'
   config.vm.network :private_network, ip: '10.0.16.2'
-  config.hostmanager.aliases = %w(puppetmaster.internal puppetmaster.localdomain)	
+  config.hostmanager.aliases = %w(puppetmaster.internal puppetboard.localdomain puppetmaster puppetmaster.localdomain)	
 
   config.vm.network "forwarded_port", guest: 8080, host: 8080 # puppetdb web interface
   config.vm.network "forwarded_port", guest: 8081, host: 8081 # puppetdb other port
@@ -34,7 +34,7 @@ Vagrant.configure("2") do |config|
   config.vm.network "forwarded_port", guest: 8140, host: 8140 # foreman port
 
   config.vm.provider "parallels" do |prl|
-    prl.optimize_power_consumption = false
+    prl.optimize_power_consumption = true
     prl.memory = 4096
     prl.cpus =  2
   end
