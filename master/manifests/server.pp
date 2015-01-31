@@ -1,6 +1,5 @@
 # Puppet labs APT key is added from hiera
-class { 'apt':
-	sources => $apt::sources}
+include apt
 
 package { 'git': }
 
@@ -36,6 +35,12 @@ file { "${::puppet::server_dir}/autosign.conf":
 *
 "
 }
+
+file_line { 'include_nodes_in_site.pp':
+  path => "${::puppet::server_dir}/manifests/site.pp",
+  line => "import 'nodes/*.pp'"
+}
+
 
 
 # Puppetboard:

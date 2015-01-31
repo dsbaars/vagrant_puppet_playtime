@@ -4,3 +4,4 @@
 **/modules/
 **/vendor/
 **/.bundle
+puppet_dir/manifests/site.pp
