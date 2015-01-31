@@ -44,6 +44,11 @@ Vagrant.configure("2") do |config|
 
     master.vm.network "forwarded_port", guest: 8140, host: 8140 # foreman port
 
+    master.vm.synced_folder "puppet_dir/manifests",     "/etc/puppet/manifests"
+    master.vm.synced_folder "puppet_dir/modules",       "/etc/puppet/modules"
+    master.vm.synced_folder "puppet_dir/environments",  "/etc/puppet/environments"
+    master.vm.synced_folder "puppet_dir/templates",     "/etc/puppet/templates"
+
     master.vm.provision :puppet do |puppet|
       puppet.hiera_config_path = 'master/data/hiera.yaml'
       puppet.working_directory = '/vagrant/master'
@@ -51,14 +56,14 @@ Vagrant.configure("2") do |config|
       puppet.module_path = "master/modules"
       puppet.manifest_file = "server.pp"
       puppet.options = [
-       '--verbose',
+       # '--verbose',
        '--report',
        '--show_diff',
        '--pluginsync',
        '--summarize',
-      #        '--evaltrace',
-              '--debug',
-      #        '--parser future',
+      #'--evaltrace',
+      #'--debug',
+      #'--parser future',
       ]
     end
   end
@@ -71,13 +76,13 @@ Vagrant.configure("2") do |config|
     client.vm.provision "puppet_server" do |puppet|
       puppet.puppet_server = 'puppetmaster.localdomain'
       puppet.options = [
-       '--verbose',
+       #'--verbose',
        '--report',
        '--show_diff',
        '--pluginsync',
        '--summarize',
        '--waitforcert', 120,
-       '--debug',
+       #'--debug',
       ]
     end
   end

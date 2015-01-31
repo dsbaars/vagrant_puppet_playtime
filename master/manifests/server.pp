@@ -2,6 +2,8 @@
 class { 'apt':
 	sources => $apt::sources}
 
+package { 'git': }
+
 # Foreman, Puppet Agent and puppetmaster:
 class { '::puppet':
   server                      => true,
@@ -10,6 +12,8 @@ class { '::puppet':
   runinterval                 => 120,
   # disable foreman
   server_external_nodes       => '',
+  # run a simple server, environments/manifests/modules are not in a git repo
+  # server_git_repo             => false
 }
 
 # Configure puppetdb and its underlying database
@@ -37,10 +41,11 @@ file { "${::puppet::server_dir}/autosign.conf":
 # Puppetboard:
 # Configure Apache on this server
 class { '::apache::mod::wsgi': }
-# Configure Puppetboard
 
+# Configure Puppetboard
+# virtualenv needs to be installed, git already is installed (from puppet server).
 class { '::puppetboard':
-  manage_git        => true,
+  manage_git        => false,
   manage_virtualenv => true,
 }
 
