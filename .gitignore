@@ -1,6 +1,6 @@
-.vagrant
-.librarian
-.tmp/
-/modules/
-/Puppetfile.lock
-vendor/
+**/.vagrant
+**/.librarian
+**/.tmp
+**/modules/
+**/vendor/
+**/.bundle

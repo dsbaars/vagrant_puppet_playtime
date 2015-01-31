@@ -6,7 +6,7 @@ mod 'puppetlabs/stdlib'
 mod 'puppetlabs/ruby'
 mod 'puppetlabs/apt'
 mod 'puppetlabs/puppetdb'
-mod 'theforeman/foreman'
+mod 'theforeman/puppet'
 
 mod 'nibalizer/puppetboard'
 mod 'puppetlabs/apache'
