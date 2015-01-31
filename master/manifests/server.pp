@@ -4,9 +4,10 @@ class { 'apt':
 
 # Foreman, Puppet Agent and puppetmaster:
 class { '::puppet':
-  server => true,
-  server_reports        => 'puppetdb, store',
-  server_storeconfigs_backend => 'puppetdb'
+  server                      => true,
+  server_reports              => 'puppetdb, store',
+  server_storeconfigs_backend => 'puppetdb',
+  runinterval                 => 120
 }
 
 # Configure puppetdb and its underlying database
