@@ -22,6 +22,9 @@ Vagrant.configure("2") do |config|
 	
   # puppet + parallels boxes are rare.
 	config.vm.box = "parallels/ubuntu-14.04"
+
+  # Run the hostmanager
+  config.vm.provision :hostmanager
     
   config.vm.provider "parallels" do |prl|
     prl.optimize_power_consumption = true
@@ -41,11 +44,9 @@ Vagrant.configure("2") do |config|
 
     master.vm.network "forwarded_port", guest: 8140, host: 8140 # foreman port
 
-
-
     master.vm.provision :puppet do |puppet|
       puppet.hiera_config_path = 'master/data/hiera.yaml'
-      puppet.working_directory = '/vagrant'
+      puppet.working_directory = '/vagrant/master'
       puppet.manifests_path = "master/manifests"
       puppet.module_path = "master/modules"
       puppet.manifest_file = "server.pp"
@@ -58,6 +59,25 @@ Vagrant.configure("2") do |config|
       #        '--evaltrace',
               '--debug',
       #        '--parser future',
+      ]
+    end
+  end
+
+  config.vm.define "client" do |client|
+    client.vm.hostname = 'puppetclient.localdomain'
+    client.vm.network :private_network, ip: '10.0.16.3'
+    client.hostmanager.aliases = %w{puppetclient.internal}
+
+    client.vm.provision "puppet_server" do |puppet|
+      puppet.puppet_server = 'puppetmaster.localdomain'
+      puppet.options = [
+       '--verbose',
+       '--report',
+       '--show_diff',
+       '--pluginsync',
+       '--summarize',
+       '--waitforcert', 120,
+       '--debug',
       ]
     end
   end
