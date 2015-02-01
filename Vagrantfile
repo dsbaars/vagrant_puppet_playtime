@@ -15,17 +15,17 @@ Vagrant.configure("2") do |config|
   config.hostmanager.manage_host = true
   config.hostmanager.ignore_private_ip = false
   config.hostmanager.include_offline = true
-  
+
   # cache plugin and ensure puppet is installed
   config.cache.auto_detect = true
   config.puppet_install.puppet_version = :latest
-	
+
   # puppet + parallels boxes are rare.
 	config.vm.box = "parallels/ubuntu-14.04"
 
   config.vm.hostname = 'puppetmaster.localdomain'
   config.vm.network :private_network, ip: '10.0.16.2'
-  config.hostmanager.aliases = %w(puppetmaster.internal puppetboard.localdomain puppetmaster puppetmaster.localdomain)	
+  config.hostmanager.aliases = %w(puppetmaster.internal puppetboard.localdomain puppetmaster puppetmaster.localdomain)
 
   config.vm.network "forwarded_port", guest: 8080, host: 8080 # puppetdb web interface
   config.vm.network "forwarded_port", guest: 8081, host: 8081 # puppetdb other port
@@ -35,8 +35,8 @@ Vagrant.configure("2") do |config|
 
   config.vm.provider "parallels" do |prl|
     prl.optimize_power_consumption = true
-    prl.memory = 4096
-    prl.cpus =  2
+    prl.memory = 8192
+    prl.cpus =  4
   end
 
   config.vm.provision :puppet do |puppet|

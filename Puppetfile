@@ -8,5 +8,7 @@ mod 'puppetlabs/apt'
 mod 'puppetlabs/puppetdb'
 mod 'theforeman/puppet'
 
-mod 'nibalizer/puppetboard'
+mod 'dsbaars/puppetboard',
+     :git => "https://github.com/dsbaars/puppet-puppetboard",
+     :ref => '2.6.1'
 mod 'puppetlabs/apache'
